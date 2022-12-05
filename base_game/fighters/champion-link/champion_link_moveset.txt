@@ -1,0 +1,31 @@
+CHARACTER MOVESET CONCEPT SHEET
+
+CHARACTER NAME: Link
+FILENAME: champion-link
+
+ARCHETYPE: mixup, zoner, trapper 
+
+PHILOSOPHY: 
+	Links design philosophy will reflect the gameplay of 'The Legend of Zelda: Breath of the Wild',
+	Links resources will be limited,but he is very skilled with the resources he has, making link be able to thrive in 
+	battles with items enabled, while hes still easily able to take control of the situation in 1 on 1 no items. 
+	that being said, link will be a fighter directed more casually, with advanced tec that will still makeing him very competativly viable.
+	that being said, link suffers much more then any other fighter with repative use of his abilites, due to one of his gimmicks, making him very
+	unspamable.
+
+
+GIMICK:
+	BREAKABLE WEAPONS: 
+		Throughout the fight, links Master Sword, hylian Shield, and Travelers bow will take damage throughout the battle,
+		if each weapon takes enough damage, it will break upon its last use, if links Master Sword breaks, he will be left with using a travelers
+		sword, which does far less damage, far less range, muhc less health, and can't shoot sword beams.
+		If that breaks, any moves using a sword will no longer be useable, if links Hylian shield breaks, he will resort to his travelers shield,
+		which covers a smaller surface, not able to defend link from higher damage projectiles, completely unable to defend against melee
+		attacks, and has less health, if that breaks, all of links shield based passive abilities, and shield based moves, will be unusable.
+		If Links travelers bow breaks, link will no longer be able to use the bow, instead his nuetral special will changed completely.
+		Link will regain all of his weapons after hos stock is cleared.
+	
+
+PASSIVE ABILITY:
+	While Link has his shield out, Link recives a simular ability to bowsers tough guy, when facing an oponent, link ignores knockback and flinch
+	of up to a certain amount, if the move directly hits his shield (for example, if link is hit by Marios Nair)
