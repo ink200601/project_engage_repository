@@ -25,7 +25,13 @@ GIMICK:
 		If Links travelers bow breaks, link will no longer be able to use the bow, instead his nuetral special will changed completely.
 		Link will regain all of his weapons after hos stock is cleared.
 	
+	FLURRY RUSH:
+		Link can preform a flurry rush by dodging rolling an oponents attack with an 8 frame window, notified by a slowmo sound and the oponent
+		speed slowed down, like bayonettas witchtime, except link also in a slomo state, he can countera attack with a flurry of 4 blows doing the
+		same base damage as Links Jabbed, multipled by 1.4x, as well as doing 3 more points of knockback, this cannot be in the stailing queue
+		in order to be used, and each time Link performs a dodge roll the frame window shrinks by 1 frame.
+	
 
 PASSIVE ABILITY:
-	While Link has his shield out, Link recives a simular ability to bowsers tough guy, when facing an oponent, link ignores knockback and flinch
-	of up to a certain amount, if the move directly hits his shield (for example, if link is hit by Marios Nair)
+	link can block projectiles up to 50% with his Hylian Sheild, or 15% with his Travelers Shield,
+	Links parry window will increase to 8 frames instead of 5.
