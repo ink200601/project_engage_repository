@@ -1,3 +1,33 @@
-[gd_scene format=3 uid="uid://c82kmiidrgox"]
+[gd_scene load_steps=6 format=3 uid="uid://c82kmiidrgox"]
+
+[ext_resource type="PackedScene" uid="uid://bdvqpm3o0b6vt" path="res://stages/base/base_stage.tscn" id="1_s58fo"]
+[ext_resource type="PackedScene" uid="uid://b51xibdewei3t" path="res://camera/fight_cam.tscn" id="2_5bsa3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3dkr"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_dqe1l"]
+sky_material = SubResource("ProceduralSkyMaterial_w3dkr")
+
+[sub_resource type="Environment" id="Environment_n2m5h"]
+background_mode = 2
+sky = SubResource("Sky_dqe1l")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="TestArena" type="Node3D"]
+
+[node name="base_stage" parent="." instance=ExtResource("1_s58fo")]
+
+[node name="FightCamera" parent="." instance=ExtResource("2_5bsa3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.8358, 300)
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_n2m5h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.984393, -0.152408, 0.0879926, 0.0508977, 0.725191, 0.686664, -0.168464, -0.671469, 0.72163, 0, 0, 0)
+shadow_enabled = true
