@@ -12,3 +12,9 @@ config_version=5
 
 config/name="project_engage"
 config/features=PackedStringArray("4.0", "Forward Plus")
+
+[layer_names]
+
+3d_physics/layer_1="Stage"
+3d_physics/layer_2="Platforms"
+3d_physics/layer_3="Fighters"
