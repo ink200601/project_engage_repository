@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfqqsbsucdiu4"]
+[gd_scene load_steps=5 format=3 uid="uid://dfqqsbsucdiu4"]
+
+[ext_resource type="Script" path="res://fighters/base/base_fighter_param.gd" id="1_2efqd"]
+[ext_resource type="Script" path="res://data/player/controller/input_manager.gd" id="2_ld485"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k78xr"]
 size = Vector3(1, 2, 1)
@@ -6,8 +9,10 @@ size = Vector3(1, 2, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_bwpwr"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_2efqd")
 
-[node name="Node" type="Node" parent="."]
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource("2_ld485")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_k78xr")
