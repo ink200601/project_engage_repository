@@ -1,16 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfqqsbsucdiu4"]
+[gd_scene load_steps=5 format=3 uid="uid://col6s42senq0q"]
+
+[ext_resource type="Script" path="res://fighters/base/base_fighter_param.gd" id="1_hnoxo"]
+[ext_resource type="Script" path="res://data/controller/player_input_manager.gd" id="2_3nhrf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k78xr"]
-size = Vector3(1, 2, 1)
+resource_local_to_scene = true
+size = Vector3(7.5, 15, 7.5)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_bwpwr"]
+top_radius = 3.75
+bottom_radius = 3.75
+height = 15.0
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_hnoxo")
+weight = 98.0
+walk_speed = 115.0
 
-[node name="Node" type="Node" parent="."]
+[node name="InputController" type="Node" parent="."]
+script = ExtResource("2_3nhrf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_k78xr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
 mesh = SubResource("CylinderMesh_bwpwr")
+skeleton = NodePath("../..")
