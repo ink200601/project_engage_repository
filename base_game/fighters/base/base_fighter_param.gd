@@ -14,7 +14,7 @@ class_name Fighter
 @onready var speed = walk_speed
 @onready var acceleration = 100
 
-@onready var director = $InputController
+@onready var director = $Director
 
 func _physics_process(delta) -> void:
 	
@@ -23,7 +23,7 @@ func _physics_process(delta) -> void:
 	if director.jump == true:
 		velocity.y += 100
 	
-	velocity.x = move_toward(velocity.x,speed * director.input_vector.x, acceleration)
+	velocity.x = move_toward(velocity.x,speed * director.direction.x, acceleration)
 	
 	move_and_slide()
 	

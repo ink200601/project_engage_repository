@@ -17,7 +17,7 @@ script = ExtResource("1_hnoxo")
 weight = 98.0
 walk_speed = 115.0
 
-[node name="InputController" type="Node" parent="."]
+[node name="Director" type="Node" parent="."]
 script = ExtResource("2_3nhrf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
