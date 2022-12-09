@@ -5,12 +5,12 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k78xr"]
 resource_local_to_scene = true
-size = Vector3(7.5, 15, 7.5)
+size = Vector3(6, 12, 6)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_bwpwr"]
-top_radius = 3.75
-bottom_radius = 3.75
-height = 15.0
+top_radius = 3.0
+bottom_radius = 3.0
+height = 12.0
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_hnoxo")

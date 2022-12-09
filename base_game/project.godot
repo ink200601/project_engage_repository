@@ -149,3 +149,7 @@ taunt_right={
 3d_physics/layer_1="Stage"
 3d_physics/layer_2="Platforms"
 3d_physics/layer_3="Fighters"
+
+[rendering]
+
+anti_aliasing/quality/msaa_3d=3

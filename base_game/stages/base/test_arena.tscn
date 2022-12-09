@@ -35,4 +35,8 @@ shadow_enabled = true
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("3_2cvlo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.3384, 0)
+gravity = 0.25
 fall_speed = 120.0
+jump_height = 25.0
+jump_time_to_peak = 0.25
+jump_time_to_descent = 0.25

@@ -16,5 +16,3 @@ func _physics_process(_delta) -> void:
 		jump = true
 	else:
 		jump = false
-	
-	print(direction)
