@@ -12,7 +12,11 @@ func _physics_process(_delta) -> void:
 	
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	
-	if Input.is_action_just_pressed("jump"):
+	
+	
+	
+	
+	if Input.is_action_pressed("jump"):
 		jump = true
 	else:
 		jump = false

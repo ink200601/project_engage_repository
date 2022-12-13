@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://col6s42senq0q"]
+[gd_scene load_steps=9 format=3 uid="uid://col6s42senq0q"]
 
 [ext_resource type="Script" path="res://fighters/base/base_fighter_param.gd" id="1_hnoxo"]
 [ext_resource type="Script" path="res://data/controller/player_input_manager.gd" id="2_3nhrf"]
+[ext_resource type="Script" path="res://fighters/state_machine.gd" id="2_j4oqr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k78xr"]
 resource_local_to_scene = true
@@ -12,19 +13,80 @@ top_radius = 3.0
 bottom_radius = 3.0
 height = 12.0
 
+[sub_resource type="Animation" id="Animation_dk3p2"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_0xsui"]
+resource_name = "jump squat"
+length = 0.03
+step = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hop"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pkugh"]
+_data = {
+"RESET": SubResource("Animation_dk3p2"),
+"jump squat": SubResource("Animation_0xsui")
+}
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_hnoxo")
 weight = 98.0
 walk_speed = 115.0
+full_hop = 25.0
+short_hop = 10.0
+jump_time_to_peak = 0.5
+jump_time_to_descent = 0.5
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_j4oqr")
 
 [node name="Director" type="Node" parent="."]
 script = ExtResource("2_3nhrf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 shape = SubResource("BoxShape3D_k78xr")
 
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 mesh = SubResource("CylinderMesh_bwpwr")
 skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pkugh")
+}
+
+[node name="PlatformDetection" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="PlatformDetection"]
+target_position = Vector3(0, -7.5, 0)
+collision_mask = 2
+debug_shape_thickness = 5
+
+[node name="RayCast3D2" type="RayCast3D" parent="PlatformDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+target_position = Vector3(0, -7.5, 0)
+collision_mask = 2
+debug_shape_thickness = 5
+
+[node name="RayCast3D3" type="RayCast3D" parent="PlatformDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+target_position = Vector3(0, -7.5, 0)
+collision_mask = 2
+debug_shape_thickness = 5

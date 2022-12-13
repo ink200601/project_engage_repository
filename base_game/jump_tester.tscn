@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0pngv1oojw4w"]
+
+[ext_resource type="Script" path="res://jump_tester.gd" id="1_vm6vn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mpr18"]
+radius = 3.5
+
+[node name="JumpTester" type="CharacterBody3D"]
+script = ExtResource("1_vm6vn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_mpr18")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 3.5
+radial_segments = 24
+rings = 24

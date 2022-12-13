@@ -11,7 +11,9 @@ class_name Fighter
 @export var fall_speed : float
 @export var fast_fall_speed : float
 
-@export var jump_height : float
+@export var full_hop : float
+@export var short_hop : float
+@onready var jump_height = full_hop
 @export var jump_time_to_peak : float
 @export var jump_time_to_descent : float
 
@@ -21,19 +23,19 @@ class_name Fighter
 
 
 @onready var speed = walk_speed
-@onready var acceleration = 100
+@onready var acceleration = 1000
 
 @onready var director = $Director
+
 
 func _physics_process(delta) -> void:
 	
 	if not is_on_floor():
-		velocity.y += get_gravity() * delta
+		velocity.y += get_gravity() * delta 
 	
 	
-	
-	if director.jump == true:
-		velocity.y = jump_velocity
+	if director.jump == true and is_on_floor():
+		$AnimationPlayer.play("jump squat")
 	
 	if director.direction.x != 0:
 		velocity.x = move_toward(velocity.x,speed * director.direction.x, acceleration)
@@ -43,8 +45,40 @@ func _physics_process(delta) -> void:
 	
 	move_and_slide()
 	
-	print(velocity)
-
+	print(jump_height)
+	
+	for r in $PlatformDetection.get_children():
+		if r.is_colliding():
+			set_collision_mask_value(2, true)
+		else:
+			set_collision_mask_value(2, false)
+	
+	
+	print(director.jump)
+	
+	
+	if Input.is_action_pressed("down"):
+		fall_gravity = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * 2
 
 func get_gravity() -> float:
 	return fall_gravity if velocity.y < 0.0 else jump_gravity
+
+
+func hop() -> void:
+	if director.jump == true:
+		jump_height = full_hop
+		jump_time_to_peak = 0.5
+		jump_time_to_descent = 0.5
+	else:
+		jump_height = short_hop
+		jump_time_to_peak = 0.25
+		jump_time_to_descent = 0.25
+	
+	jump()
+
+
+func jump() -> void:
+	jump_velocity = ((2.0 * jump_height) / jump_time_to_peak)
+	jump_gravity = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak))
+	fall_gravity = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent))
+	velocity.y = jump_velocity

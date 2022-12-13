@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdvqpm3o0b6vt" path="res://stages/base/base_stage.tscn" id="1_s58fo"]
 [ext_resource type="PackedScene" uid="uid://b51xibdewei3t" path="res://camera/fight_cam.tscn" id="2_5bsa3"]
-[ext_resource type="PackedScene" uid="uid://col6s42senq0q" path="res://fighters/base/base_fighter.tscn" id="3_2cvlo"]
+[ext_resource type="PackedScene" uid="uid://d0pngv1oojw4w" path="res://jump_tester.tscn" id="3_6wpro"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3dkr"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,7 +22,7 @@ glow_enabled = true
 [node name="base_stage" parent="." instance=ExtResource("1_s58fo")]
 
 [node name="FightCamera" parent="." instance=ExtResource("2_5bsa3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.8358, 300)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5384, 200)
 
 [node name="Environment" type="Node" parent="."]
 
@@ -33,10 +33,4 @@ environment = SubResource("Environment_n2m5h")
 transform = Transform3D(0.984393, -0.152408, 0.0879926, 0.0508977, 0.725191, 0.686664, -0.168464, -0.671469, 0.72163, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("3_2cvlo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.3384, 0)
-gravity = 0.25
-fall_speed = 120.0
-jump_height = 25.0
-jump_time_to_peak = 0.25
-jump_time_to_descent = 0.25
+[node name="JumpTester" parent="." instance=ExtResource("3_6wpro")]
