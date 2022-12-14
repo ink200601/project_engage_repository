@@ -44,7 +44,9 @@ _data = {
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_hnoxo")
 weight = 98.0
+gravity = 50.0
 walk_speed = 115.0
+fall_speed = 300.0
 full_hop = 25.0
 short_hop = 10.0
 jump_time_to_peak = 0.5

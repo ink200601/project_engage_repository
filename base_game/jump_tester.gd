@@ -11,7 +11,6 @@ func _physics_process(delta):
 	
 	velocity.y += gravity
 	
-	gravity = clamp(gravity, -terminal_vel, terminal_vel)
 	
 	if velocity.y < 0:
 		velocity.y = clamp(velocity.y, -terminal_vel, terminal_vel)

@@ -17,6 +17,7 @@ class_name Fighter
 @export var jump_time_to_peak : float
 @export var jump_time_to_descent : float
 
+@onready var initial_jump = full_hop * 0.55
 @onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak)
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak))
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent))
@@ -30,18 +31,24 @@ class_name Fighter
 
 func _physics_process(delta) -> void:
 	
-	if not is_on_floor():
-		velocity.y += get_gravity() * delta 
+	
+	velocity.y -= gravity
 	
 	
 	if director.jump == true and is_on_floor():
-		$AnimationPlayer.play("jump squat")
+		#$AnimationPlayer.play("jump squat")
+		velocity = velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
 	
 	if director.direction.x != 0:
 		velocity.x = move_toward(velocity.x,speed * director.direction.x, acceleration)
 	
 	else:
 		velocity.x = move_toward(velocity.x, 0, acceleration)
+	
+	
+	if velocity.y < 0:
+		velocity.y = clamp(velocity.y, -fall_speed, fall_speed)
+	
 	
 	move_and_slide()
 	
@@ -64,21 +71,6 @@ func get_gravity() -> float:
 	return fall_gravity if velocity.y < 0.0 else jump_gravity
 
 
-func hop() -> void:
-	if director.jump == true:
-		jump_height = full_hop
-		jump_time_to_peak = 0.5
-		jump_time_to_descent = 0.5
-	else:
-		jump_height = short_hop
-		jump_time_to_peak = 0.25
-		jump_time_to_descent = 0.25
-	
-	jump()
-
-
-func jump() -> void:
-	jump_velocity = ((2.0 * jump_height) / jump_time_to_peak)
-	jump_gravity = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak))
-	fall_gravity = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent))
-	velocity.y = jump_velocity
+func hop(delta) -> void:
+	#velocity = velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
+	pass

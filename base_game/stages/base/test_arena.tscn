@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdvqpm3o0b6vt" path="res://stages/base/base_stage.tscn" id="1_s58fo"]
 [ext_resource type="PackedScene" uid="uid://b51xibdewei3t" path="res://camera/fight_cam.tscn" id="2_5bsa3"]
-[ext_resource type="PackedScene" uid="uid://d0pngv1oojw4w" path="res://jump_tester.tscn" id="3_6wpro"]
+[ext_resource type="PackedScene" uid="uid://col6s42senq0q" path="res://fighters/base/base_fighter.tscn" id="3_74est"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3dkr"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,4 +33,5 @@ environment = SubResource("Environment_n2m5h")
 transform = Transform3D(0.984393, -0.152408, 0.0879926, 0.0508977, 0.725191, 0.686664, -0.168464, -0.671469, 0.72163, 0, 0, 0)
 shadow_enabled = true
 
-[node name="JumpTester" parent="." instance=ExtResource("3_6wpro")]
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_74est")]
+full_hop = 250.0
