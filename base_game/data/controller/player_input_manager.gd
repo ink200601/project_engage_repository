@@ -2,7 +2,7 @@ extends Node
 
 @onready var direction = Vector3()
 
-var jump = false
+var jump_input = false
 
 func _physics_process(_delta) -> void:
 	
@@ -17,6 +17,6 @@ func _physics_process(_delta) -> void:
 	
 	
 	if Input.is_action_pressed("jump"):
-		jump = true
+		jump_input = true
 	else:
-		jump = false
+		jump_input = false

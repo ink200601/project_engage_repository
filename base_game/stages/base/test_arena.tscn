@@ -22,7 +22,8 @@ glow_enabled = true
 [node name="base_stage" parent="." instance=ExtResource("1_s58fo")]
 
 [node name="FightCamera" parent="." instance=ExtResource("2_5bsa3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5384, 200)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28)
+visible = false
 
 [node name="Environment" type="Node" parent="."]
 
@@ -34,4 +35,7 @@ transform = Transform3D(0.984393, -0.152408, 0.0879926, 0.0508977, 0.725191, 0.6
 shadow_enabled = true
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("3_74est")]
-full_hop = 250.0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28)
+remote_path = NodePath("../../FightCamera")

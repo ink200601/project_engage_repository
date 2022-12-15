@@ -53,7 +53,7 @@ data = PackedVector3Array(-17.8419, 10.3331, -45.1617, -17.8419, 10.3331, -47, -
 [node name="base_stage" type="Node3D"]
 
 [node name="main_ringShape" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, -6.55671e-09, -0.15, 0, 0.15, -6.55671e-09, 0, 0, 0)
 mesh = SubResource("ArrayMesh_0lb4t")
 skeleton = NodePath("")
 
@@ -64,7 +64,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.54)
 shape = SubResource("BoxShape3D_cx6vg")
 
 [node name="floating_plateShape" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, -6.55671e-09, -0.15, 0, 0.15, -6.55671e-09, 0, 0, 0)
 mesh = SubResource("ArrayMesh_y0twh")
 skeleton = NodePath("")
 
