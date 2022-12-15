@@ -48,6 +48,7 @@ weight = 98.0
 gravity = 0.5
 walk_speed = 8.0
 fall_speed = 3.0
+fast_fall_speed = 6.0
 full_hop = 40.5
 
 [node name="StateMachine" type="Node" parent="."]

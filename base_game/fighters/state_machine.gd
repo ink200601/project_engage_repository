@@ -4,14 +4,14 @@ extends Node
 @onready var director = $"../Director"
 
 @onready var weight = fighter.weight
-@onready var gravity = fighter.gravity
+@onready var fall_gravity = fighter.gravity
 @onready var walk_speed = fighter.walk_speed
 @onready var run_speed = fighter.run_speed
 @onready var initial_dash = fighter.initial_dash
 @onready var air_speed = fighter.air_speed
 @onready var air_acceleration = fighter.air_acceleration
-@onready var fall_speed = fighter.fall_speed
-@onready var fast_fall_speed = fighter.fast_fall_speed
+@onready var fall = fighter.fall_speed
+@onready var fast_fall= fighter.fast_fall_speed
 
 @onready var full_hop = fighter.full_hop
 @onready var short_hop = fighter.short_hop
@@ -20,6 +20,8 @@ extends Node
 
 @onready var speed = walk_speed
 @onready var acceleration = 1000
+@onready var fall_speed = fall
+@onready var gravity = fall_gravity
 
 @onready var velocity = fighter.velocity
 
@@ -34,6 +36,8 @@ var state = GROUND
 
 func _physics_process(delta) -> void:
 	
+	var velocity = fighter.velocity
+	
 	if fighter.is_on_floor():
 		state = GROUND
 	
@@ -42,6 +46,9 @@ func _physics_process(delta) -> void:
 	
 	match state:
 		GROUND:
+			
+			reset_fall()
+			
 			if director.direction.x != 0:
 				fighter.velocity.x = move_toward(fighter.velocity.x, speed * director.direction.x, acceleration)
 			
@@ -62,9 +69,18 @@ func _physics_process(delta) -> void:
 			else:
 				fighter.velocity.x = move_toward(fighter.velocity.x, 0, acceleration)
 			
+			
 			if velocity.y < 0:
+				if director.down_input == true:
+					fall_speed = fast_fall
 				fighter.velocity.y = clamp(fighter.velocity.y, -fall_speed, fall_speed)
 			
 			fighter.move_and_slide()
 		AIRATTACK:
 			pass
+	
+	print(fighter.velocity.y)
+
+func reset_fall():
+	fall_speed = fall
+	

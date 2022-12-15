@@ -32,9 +32,11 @@ func _physics_process(delta) -> void:
 		elif !r.is_colliding() and not is_on_floor():
 			set_collision_mask_value(2, false)
 		
-		if Input.is_action_just_pressed("down") and r.is_colliding():
+		if Input.is_action_pressed("down") and r.is_colliding():
+			r.set_collision_mask_value(2, false)
 			set_collision_mask_value(2, false)
-	
+		else:
+			r.set_collision_mask_value(2, true)
 
 
 
