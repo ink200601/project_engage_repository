@@ -11,6 +11,8 @@ class_name Fighter
 @export var air_acceleration : float
 @export var fall_speed : float
 @export var fast_fall_speed : float
+@export var percent: float
+@export var knockback_vector: Vector3
 
 @export var full_hop : float
 @export var short_hop : float
@@ -22,6 +24,11 @@ class_name Fighter
 @onready var acceleration = 1000
 
 @onready var director = $Director
+
+
+func _ready() -> void:
+	knockback_vector.z = 0
+	knockback_vector = knockback_vector.normalized()
 
 
 func _physics_process(delta) -> void:
@@ -43,3 +50,9 @@ func _physics_process(delta) -> void:
 func hop(delta) -> void:
 	velocity = velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
 	pass
+
+
+func _on_hitbox_launched(body: Node3D, damage := 0.1, knockback_growth := 0.1, base_knockback := 0.1) -> void:
+	velocity = (((((body.percent / 10 + body.percent * damage / 20) * 200 / body.weight + 100 * 1.4) + 18) * knockback_growth) + base_knockback) * knockback_vector
+	$StateMachine.state = 4
+

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://col6s42senq0q"]
+[gd_scene load_steps=12 format=3 uid="uid://col6s42senq0q"]
 
 [ext_resource type="Script" path="res://fighters/base/base_fighter_param.gd" id="1_hnoxo"]
 [ext_resource type="Script" path="res://data/controller/player_input_manager.gd" id="2_3nhrf"]
 [ext_resource type="Script" path="res://fighters/state_machine.gd" id="2_j4oqr"]
+[ext_resource type="Script" path="res://fighters/base/hitbox.gd" id="4_eh7k2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k78xr"]
 resource_local_to_scene = true
@@ -42,13 +43,20 @@ _data = {
 "jump squat": SubResource("Animation_0xsui")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_y6k6b"]
+resource_local_to_scene = true
+size = Vector3(1.1, 2, 1)
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_hnoxo")
 weight = 98.0
 gravity = 0.5
 walk_speed = 8.0
 fall_speed = 3.0
 fast_fall_speed = 6.0
+knockback_vector = Vector3(1, 1, 0)
 full_hop = 40.5
 
 [node name="StateMachine" type="Node" parent="."]
@@ -78,3 +86,15 @@ libraries = {
 [node name="RayCast3D" type="RayCast3D" parent="PlatformDetection"]
 collision_mask = 2
 debug_shape_thickness = 5
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("4_eh7k2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("BoxShape3D_y6k6b")
+
+[connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_body_entered"]
+[connection signal="launched" from="Hitbox" to="." method="_on_hitbox_launched"]

@@ -29,7 +29,8 @@ enum {
 	GROUND,
 	GROUNDATTACK,
 	AIR,
-	AIRATTACK
+	AIRATTACK,
+	LAUNCHED
 }
 
 var state = GROUND
@@ -78,8 +79,12 @@ func _physics_process(delta) -> void:
 			fighter.move_and_slide()
 		AIRATTACK:
 			pass
+		LAUNCHED:
+			fighter.velocity.y -= gravity
+			fighter.velocity.y = clamp(fighter.velocity.y, -fall_speed, fall_speed)
+			fighter.move_and_slide()
 	
-	print(fighter.velocity.y)
+#	print(fighter.velocity.y)
 
 func reset_fall():
 	fall_speed = fall
