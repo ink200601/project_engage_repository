@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://c82kmiidrgox"]
+[gd_scene load_steps=10 format=3 uid="uid://c82kmiidrgox"]
 
 [ext_resource type="PackedScene" uid="uid://bdvqpm3o0b6vt" path="res://stages/base/base_stage.tscn" id="1_s58fo"]
 [ext_resource type="PackedScene" uid="uid://b51xibdewei3t" path="res://camera/fight_cam.tscn" id="2_5bsa3"]
 [ext_resource type="PackedScene" uid="uid://col6s42senq0q" path="res://fighters/base/base_fighter.tscn" id="3_74est"]
+[ext_resource type="PackedScene" uid="uid://bcu50826fpej0" path="res://ui/battle_ui/battle_ui.tscn" id="4_71is5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3dkr"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_top_color = Color(0.160784, 0.207843, 0.333333, 1)
+sky_horizon_color = Color(0.145098, 0.203922, 0.266667, 1)
+ground_bottom_color = Color(0.160784, 0.207843, 0.333333, 1)
+ground_horizon_color = Color(0.145098, 0.203922, 0.266667, 1)
 
 [sub_resource type="Sky" id="Sky_dqe1l"]
 sky_material = SubResource("ProceduralSkyMaterial_w3dkr")
@@ -30,7 +33,7 @@ size = Vector3(1, 2, 1)
 [node name="base_stage" parent="." instance=ExtResource("1_s58fo")]
 
 [node name="FightCamera" parent="." instance=ExtResource("2_5bsa3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 28)
 visible = false
 
 [node name="Environment" type="Node" parent="."]
@@ -39,7 +42,8 @@ visible = false
 environment = SubResource("Environment_n2m5h")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.984393, -0.152408, 0.0879926, 0.0508977, 0.725191, 0.686664, -0.168464, -0.671469, 0.72163, 0, 0, 0)
+transform = Transform3D(0.984393, -0.152407, 0.0879923, 0.0508977, 0.725191, 0.686664, -0.168464, -0.671469, 0.72163, 0, 0, 0)
+light_energy = 0.4
 shadow_enabled = true
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("3_74est")]
@@ -55,7 +59,7 @@ controllable = true
 shape = SubResource("BoxShape3D_r827d")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 28)
 remote_path = NodePath("../../FightCamera")
 
 [node name="CharacterBody3D2" parent="." instance=ExtResource("3_74est")]
@@ -64,5 +68,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 [node name="CollisionShape3D" parent="CharacterBody3D2" index="2"]
 shape = SubResource("BoxShape3D_85bd0")
 
+[node name="Control" parent="." instance=ExtResource("4_71is5")]
+grow_horizontal = 2
+grow_vertical = 2
+
 [editable path="CharacterBody3D"]
+[editable path="CharacterBody3D/HitBox"]
 [editable path="CharacterBody3D2"]
+[editable path="CharacterBody3D2/HitBox"]

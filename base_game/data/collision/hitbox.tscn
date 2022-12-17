@@ -4,7 +4,7 @@
 
 [node name="HitBox" type="Area3D"]
 script = ExtResource("1_68k7t")
-knockback_vector = Vector3(1, 0, 0)
+knockback_vector = Vector3(1, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 
