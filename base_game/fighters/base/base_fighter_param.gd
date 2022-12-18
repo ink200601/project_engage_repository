@@ -40,6 +40,7 @@ func _physics_process(delta) -> void:
 		else:
 			r.set_collision_mask_value(2, true)
 	
+	
 
 
 func hop(delta) -> void:

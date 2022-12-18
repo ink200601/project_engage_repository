@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c82kmiidrgox"]
+[gd_scene load_steps=12 format=3 uid="uid://c82kmiidrgox"]
 
 [ext_resource type="PackedScene" uid="uid://bdvqpm3o0b6vt" path="res://stages/base/base_stage.tscn" id="1_s58fo"]
 [ext_resource type="PackedScene" uid="uid://b51xibdewei3t" path="res://camera/fight_cam.tscn" id="2_5bsa3"]
 [ext_resource type="PackedScene" uid="uid://col6s42senq0q" path="res://fighters/base/base_fighter.tscn" id="3_74est"]
 [ext_resource type="PackedScene" uid="uid://bcu50826fpej0" path="res://ui/battle_ui/battle_ui.tscn" id="4_71is5"]
+[ext_resource type="Script" path="res://stages/blastzone.gd" id="5_qeb1u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3dkr"]
 sky_top_color = Color(0.160784, 0.207843, 0.333333, 1)
@@ -27,6 +28,9 @@ size = Vector3(1, 2, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_85bd0"]
 resource_local_to_scene = true
 size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tiey"]
+size = Vector3(59.3988, 38.0875, 32.4524)
 
 [node name="TestArena" type="Node3D"]
 
@@ -71,6 +75,19 @@ shape = SubResource("BoxShape3D_85bd0")
 [node name="Control" parent="." instance=ExtResource("4_71is5")]
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BlastZone" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="BlastZone"]
+script = ExtResource("5_qeb1u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlastZone/Area3D"]
+shape = SubResource("BoxShape3D_5tiey")
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.905, 0)
+
+[connection signal="body_exited" from="BlastZone/Area3D" to="BlastZone/Area3D" method="_on_body_exited"]
 
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/HitBox"]

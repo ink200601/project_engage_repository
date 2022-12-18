@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://data/collision/hitbox.gd" id="1_68k7t"]
 
 [node name="HitBox" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_68k7t")
 knockback_vector = Vector3(1, 1, 0)
 
