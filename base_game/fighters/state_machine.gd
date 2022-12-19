@@ -23,32 +23,30 @@ extends Node
 @onready var fall_speed = fall
 @onready var gravity = fall_gravity
 
-@onready var velocity = fighter.velocity
 
 enum {
-	GROUND,
+	STANDING,
+	WALKING,
 	GROUNDATTACK,
 	AIR,
 	AIRATTACK,
-	LAUNCHED
+	HELPLESS
 }
 
-var state = GROUND
-
+var state = STANDING
 func _physics_process(delta) -> void:
 	
 	var velocity = fighter.velocity
 	
 	if fighter.is_on_floor():
-		state = GROUND
+		state = STANDING
+		reset_fall()
 	
 	else:
 		state = AIR
 	
 	match state:
-		GROUND:
-			
-			reset_fall()
+		STANDING:
 			
 			if director.direction.x != 0:
 				fighter.velocity.x = move_toward(fighter.velocity.x, speed * director.direction.x, acceleration)
@@ -59,7 +57,6 @@ func _physics_process(delta) -> void:
 			if director.jump_input == true:
 				fighter.velocity = fighter.velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
 			
-			fighter.move_and_slide()
 		GROUNDATTACK:
 			pass
 		AIR:
@@ -79,11 +76,12 @@ func _physics_process(delta) -> void:
 			fighter.move_and_slide()
 		AIRATTACK:
 			pass
-		LAUNCHED:
+		HELPLESS:
 			fighter.velocity.y -= gravity
 			fighter.velocity.y = clamp(fighter.velocity.y, -fall_speed, fall_speed)
 			fighter.move_and_slide()
 	
+	fighter.move_and_slide()
 #	print(fighter.velocity.y)
 
 func reset_fall():

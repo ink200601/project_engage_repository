@@ -51,10 +51,6 @@ light_energy = 0.4
 shadow_enabled = true
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("3_74est")]
-gravity = 1.0
-fall_speed = 10.0
-fast_fall_speed = 24.0
-full_hop = 55.0
 
 [node name="Director" parent="CharacterBody3D" index="1"]
 controllable = true
