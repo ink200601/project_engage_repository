@@ -1,19 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://col6s42senq0q"]
+[gd_scene load_steps=11 format=3 uid="uid://col6s42senq0q"]
 
 [ext_resource type="Script" path="res://fighters/base/base_fighter_param.gd" id="1_hnoxo"]
 [ext_resource type="Script" path="res://data/controller/player_input_manager.gd" id="2_3nhrf"]
 [ext_resource type="Script" path="res://fighters/state_machine.gd" id="2_j4oqr"]
+[ext_resource type="PackedScene" uid="uid://cs2sqej0urcay" path="res://fighters/base/model.tscn" id="4_4fe13"]
 [ext_resource type="PackedScene" uid="uid://cami2i5sxxb06" path="res://data/collision/hitbox.tscn" id="4_u02u1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k78xr"]
 resource_local_to_scene = true
 size = Vector3(1, 2, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djs32"]
-albedo_color = Color(0.639216, 0.894118, 0.329412, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_bwpwr"]
-material = SubResource("StandardMaterial3D_djs32")
 
 [sub_resource type="Animation" id="Animation_dk3p2"]
 length = 0.001
@@ -68,10 +63,82 @@ shape = SubResource("BoxShape3D_k78xr")
 
 [node name="Mesh" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CylinderMesh_bwpwr")
-skeleton = NodePath("../..")
+[node name="model" parent="Mesh" instance=ExtResource("4_4fe13")]
+transform = Transform3D(-1.00536e-07, 0, 2.3, 0, 2.3, 0, -2.3, 0, -1.00536e-07, 0, 0, -0.134739)
+
+[node name="Skeleton3D" parent="Mesh/model/FighterRig" index="0"]
+bones/0/position = Vector3(0.0159102, 0.383501, -0.00690458)
+bones/0/rotation = Quaternion(0.0776492, -0.29767, 0.232692, 0.922615)
+bones/1/rotation = Quaternion(-0.071465, -0.00179746, -0.345334, 0.935753)
+bones/2/rotation = Quaternion(0.866166, -0.0753507, -0.00423972, 0.494026)
+bones/3/rotation = Quaternion(0.450361, 0.00766643, -0.0699476, 0.890069)
+bones/4/rotation = Quaternion(0.752616, -0.381853, 0.316925, 0.4328)
+bones/5/rotation = Quaternion(0.576869, -0.00699288, 0.0895959, 0.811878)
+bones/6/rotation = Quaternion(0.952111, 0.0324211, 0.303853, 0.0103467)
+bones/8/position = Vector3(-0.0449115, 0.301725, 0.207257)
+bones/9/position = Vector3(0.146271, 0.583445, 0.291613)
+bones/9/rotation = Quaternion(-0.0019562, -0.543186, -0.830029, 0.126478)
+bones/12/position = Vector3(-0.00221043, 0.535783, 0.019218)
+bones/12/rotation = Quaternion(0.221067, -0.29573, -0.0705505, 0.926659)
+bones/13/position = Vector3(1.41012e-15, 5.66754e-11, 3.0821e-08)
+bones/15/rotation = Quaternion(0.189761, 0.296272, -0.0844271, 0.932247)
+bones/17/rotation = Quaternion(-0.134944, 0.324688, -0.383059, 0.854186)
+bones/18/rotation = Quaternion(0.812859, 0.0408655, 0.0711061, 0.576658)
+bones/20/rotation = Quaternion(-0.390337, -0.700226, 0.364792, 0.473547)
+bones/21/rotation = Quaternion(0.622061, -0.0552131, -0.0544151, 0.779122)
+bones/22/position = Vector3(-0.000431498, 1.13272, 0.475727)
+bones/26/position = Vector3(-0.204711, 0.480739, -0.0999939)
+bones/26/rotation = Quaternion(0.253727, 0.160613, -0.727825, 0.61652)
+bones/28/position = Vector3(-0.0307231, 0.535848, -0.27757)
+bones/28/rotation = Quaternion(0.317474, 0.898207, 0.101317, 0.28665)
+
+[node name="Abdomen" parent="Mesh/model/FighterRig/Skeleton3D" index="0"]
+transform = Transform3D(0.824276, 0.172644, -0.539225, -0.291387, 0.945922, -0.142566, 0.485451, 0.274637, 0.830007, -0.0184167, 0.446991, -0.00656175)
+
+[node name="ShinL" parent="Mesh/model/FighterRig/Skeleton3D" index="1"]
+transform = Transform3D(0.716185, 0.415327, 0.560868, 0.373838, -0.906922, 0.194234, 0.589341, 0.0705733, -0.804792, -0.0337927, 0.276568, 0.177209)
+
+[node name="ThighL" parent="Mesh/model/FighterRig/Skeleton3D" index="2"]
+transform = Transform3D(0.735994, -0.291698, 0.610914, 0.24136, -0.730049, -0.639345, 0.632501, 0.61801, -0.466903, 0.0238402, 0.42081, 0.0551042)
+
+[node name="ShinR" parent="Mesh/model/FighterRig/Skeleton3D" index="3"]
+transform = Transform3D(0.084956, 0.475692, 0.8755, -0.463533, -0.758933, 0.457337, 0.881997, -0.444677, 0.156023, -0.18657, 0.232618, -0.0437072)
+
+[node name="ThighR" parent="Mesh/model/FighterRig/Skeleton3D" index="4"]
+transform = Transform3D(0.0911008, -0.658044, 0.747448, -0.29743, -0.73429, -0.610207, 0.950387, -0.166723, -0.262616, -0.0565556, 0.377698, -0.0107664)
+
+[node name="BoneAttachment3D6" parent="Mesh/model/FighterRig/Skeleton3D" index="5"]
+transform = Transform3D(0.714494, -0.475599, -0.513132, 0.383143, 0.87965, -0.281812, 0.585405, 0.00474969, 0.810727, 0.0159102, 0.383501, -0.00690458)
+
+[node name="BoneAttachment3D7" parent="Mesh/model/FighterRig/Skeleton3D" index="6"]
+transform = Transform3D(0.815135, -6.59981e-05, -0.579277, 3.64706e-05, 1, -6.25918e-05, 0.57928, 2.98882e-05, 0.815131, 0.0895038, 0.00733806, 0.198157)
+
+[node name="BoneAttachment3D8" parent="Mesh/model/FighterRig/Skeleton3D" index="7"]
+transform = Transform3D(-0.972866, 0.179084, -0.146493, -0.201183, -0.342074, 0.917884, 0.114267, 0.92245, 0.368821, 0.146271, 0.583445, 0.291613)
+
+[node name="Head" parent="Mesh/model/FighterRig/Skeleton3D" index="8"]
+transform = Transform3D(0.999961, 0.00619195, 0.00635082, -3.8743e-07, 0.716034, -0.698065, -0.0088698, 0.698038, 0.716006, -0.00361114, 0.765025, 0.117279)
+
+[node name="Neck" parent="Mesh/model/FighterRig/Skeleton3D" index="9"]
+transform = Transform3D(0.815133, -0.041877, -0.577758, -0.170017, 0.936162, -0.307725, 0.553762, 0.349065, 0.755977, 0.000810898, 0.66617, 0.0804191)
+
+[node name="ForearmL" parent="Mesh/model/FighterRig/Skeleton3D" index="10"]
+transform = Transform3D(-0.731876, -0.277152, -0.622531, -0.63418, 0.611304, 0.473417, 0.249347, 0.741279, -0.623162, 0.188224, 0.490911, 0.179413)
+
+[node name="UpperArmL" parent="Mesh/model/FighterRig/Skeleton3D" index="11"]
+transform = Transform3D(-0.819018, 0.563253, -0.109336, -0.558129, -0.737912, 0.379444, 0.133043, 0.371795, 0.918732, 0.0963359, 0.611293, 0.118759)
+
+[node name="ForearmR" parent="Mesh/model/FighterRig/Skeleton3D" index="12"]
+transform = Transform3D(-0.646769, -0.761018, -0.0504156, 0.700888, -0.619128, 0.354171, -0.300745, 0.193731, 0.93382, -0.089525, 0.574442, -0.129323)
+
+[node name="UpperArmR" parent="Mesh/model/FighterRig/Skeleton3D" index="13"]
+transform = Transform3D(-0.643497, -0.0197108, -0.765195, 0.628047, -0.58506, -0.513091, -0.437571, -0.810751, 0.388863, -0.0863093, 0.669887, 0.00294114)
+
+[node name="Chest" parent="Mesh/model/FighterRig/Skeleton3D" index="14"]
+transform = Transform3D(0.818392, 0.0209716, -0.574277, -0.259604, 0.905041, -0.336906, 0.512679, 0.424806, 0.746123, -0.00221044, 0.535783, 0.019218)
+
+[node name="BoneAttachment3D17" parent="Mesh/model/FighterRig/Skeleton3D" index="16"]
+transform = Transform3D(-0.0849748, 0.972824, -0.215387, -0.823037, -0.190372, -0.535134, -0.561595, 0.131798, 0.816848, -0.204719, 0.480728, -0.0999979)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -94,4 +161,17 @@ knockback_growth = 30
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, 0)
 shape = SubResource("SphereShape3D_bvclj")
 
+[editable path="Mesh/model"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/Abdomen/Abdomen/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/ShinL/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/ThighL/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/ShinR/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/ThighR/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/Head/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/Neck/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/ForearmL/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/UpperArmL/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/ForearmR/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/UpperArmR/Hurtbox"]
+[editable path="Mesh/model/FighterRig/Skeleton3D/Chest/Hurtbox"]
 [editable path="HitBox"]
