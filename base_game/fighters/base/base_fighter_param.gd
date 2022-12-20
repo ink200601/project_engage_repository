@@ -15,6 +15,8 @@ class_name Fighter
 
 @export var full_hop : float
 @export var short_hop : float
+@export var midair_hop : float
+@export var midair_jumps : float
 @onready var jump_height = full_hop
 
 @onready var initial_jump = full_hop * 0.55
@@ -27,25 +29,6 @@ class_name Fighter
 
 
 func _physics_process(delta) -> void:
-	
-	for r in $PlatformDetection.get_children():
-		if r.is_colliding():
-			set_collision_mask_value(2, true)
-		elif !r.is_colliding() and not is_on_floor():
-			set_collision_mask_value(2, false)
-		
-		if Input.is_action_pressed("down") and r.is_colliding():
-			r.set_collision_mask_value(2, false)
-			set_collision_mask_value(2, false)
-		else:
-			r.set_collision_mask_value(2, true)
-	
-	
-
-
-func hop(delta) -> void:
-	velocity = velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
 	pass
-
 
 

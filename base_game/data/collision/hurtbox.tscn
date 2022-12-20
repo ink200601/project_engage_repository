@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cuihjrlh8vpqu"]
 
 [node name="Hurtbox" type="Area3D"]
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

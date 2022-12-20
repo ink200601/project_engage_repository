@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cami2i5sxxb06"]
+[gd_scene load_steps=2 format=3 uid="uid://cami2i5sxxb06"]
 
 [ext_resource type="Script" path="res://data/collision/hitbox.gd" id="1_68k7t"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_wiwlp"]
 
 [node name="HitBox" type="Area3D"]
 collision_layer = 0
@@ -11,15 +9,5 @@ script = ExtResource("1_68k7t")
 knockback_vector = Vector3(1, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-top_level = true
-shape = SubResource("SphereShape3D_wiwlp")
-
-[node name="LaunchAngle" type="Node3D" parent="."]
-
-[node name="RayCast3D" type="RayCast3D" parent="LaunchAngle"]
-target_position = Vector3(0.5, 0, 0)
-collision_mask = 0
-debug_shape_custom_color = Color(1, 1, 1, 1)
-debug_shape_thickness = 3
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

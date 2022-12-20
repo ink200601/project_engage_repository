@@ -15,6 +15,8 @@ extends Node
 
 @onready var full_hop = fighter.full_hop
 @onready var short_hop = fighter.short_hop
+@onready var midair_hop = fighter.midair_hop
+@onready var midair_jumps = fighter.midair_jumps
 
 @onready var initial_jump = full_hop * 0.55
 
@@ -27,39 +29,40 @@ extends Node
 enum {
 	STANDING,
 	WALKING,
+	INITIALDASH,
+	DASHING,
 	GROUNDATTACK,
 	AIR,
-	AIRATTACK,
+	JUMP,
 	HELPLESS
 }
+
+var previous_state
 
 var state = STANDING
 func _physics_process(delta) -> void:
 	
-	var velocity = fighter.velocity
-	
-	if fighter.is_on_floor():
-		state = STANDING
-		reset_fall()
-	
-	else:
-		state = AIR
+	var current_state = state
 	
 	match state:
 		STANDING:
 			
 			if director.direction.x != 0:
 				fighter.velocity.x = move_toward(fighter.velocity.x, speed * director.direction.x, acceleration)
-			
 			else:
-				fighter.velocity.x = move_toward(fighter.velocity.x, 0, acceleration)
+				fighter.velocity.x = move_toward(fighter.velocity.x, 0, 1)
 			
 			if director.jump_input == true:
-				fighter.velocity = fighter.velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
+				previous_state = state
+				state = JUMP
+			if !fighter.is_on_floor():
+				director.air_jump_input = false
+				state = AIR
 			
-		GROUNDATTACK:
+		WALKING:
 			pass
 		AIR:
+			director.air_jump_input = false
 			fighter.velocity.y -= gravity
 			
 			if director.direction.x != 0:
@@ -67,22 +70,29 @@ func _physics_process(delta) -> void:
 			else:
 				fighter.velocity.x = move_toward(fighter.velocity.x, 0, acceleration)
 			
+			if director.air_jump_input == true:
+				fighter.velocity = fighter.velocity.lerp(Vector3(0, initial_jump, 0), midair_hop * delta)
 			
-			if velocity.y < 0:
+			if fighter.velocity.y < 0:
 				if director.down_input == true:
 					fall_speed = fast_fall
 				fighter.velocity.y = clamp(fighter.velocity.y, -fall_speed, fall_speed)
 			
-			fighter.move_and_slide()
-		AIRATTACK:
-			pass
+			if fighter.is_on_floor():
+				previous_state = state
+				state = STANDING
+
+		JUMP:
+			previous_state = state
+			fighter.velocity = fighter.velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
+			state = AIR
 		HELPLESS:
 			fighter.velocity.y -= gravity
 			fighter.velocity.y = clamp(fighter.velocity.y, -fall_speed, fall_speed)
 			fighter.move_and_slide()
 	
 	fighter.move_and_slide()
-#	print(fighter.velocity.y)
+	print(previous_state)
 
 func reset_fall():
 	fall_speed = fall

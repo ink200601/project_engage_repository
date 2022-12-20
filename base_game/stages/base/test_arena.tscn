@@ -7,10 +7,6 @@
 [ext_resource type="Script" path="res://stages/blastzone.gd" id="5_qeb1u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3dkr"]
-sky_top_color = Color(0.160784, 0.207843, 0.333333, 1)
-sky_horizon_color = Color(0.145098, 0.203922, 0.266667, 1)
-ground_bottom_color = Color(0.160784, 0.207843, 0.333333, 1)
-ground_horizon_color = Color(0.145098, 0.203922, 0.266667, 1)
 
 [sub_resource type="Sky" id="Sky_dqe1l"]
 sky_material = SubResource("ProceduralSkyMaterial_w3dkr")
@@ -21,6 +17,9 @@ sky = SubResource("Sky_dqe1l")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tiey"]
+size = Vector3(59.3988, 38.0875, 32.4524)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_r827d"]
 resource_local_to_scene = true
 size = Vector3(1, 2, 1)
@@ -29,16 +28,12 @@ size = Vector3(1, 2, 1)
 resource_local_to_scene = true
 size = Vector3(1, 2, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_5tiey"]
-size = Vector3(59.3988, 38.0875, 32.4524)
-
 [node name="TestArena" type="Node3D"]
 
-[node name="base_stage" parent="." instance=ExtResource("1_s58fo")]
-
 [node name="FightCamera" parent="." instance=ExtResource("2_5bsa3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 28)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 38)
 visible = false
+current = true
 
 [node name="Environment" type="Node" parent="."]
 
@@ -46,72 +41,180 @@ visible = false
 environment = SubResource("Environment_n2m5h")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.984393, -0.152407, 0.0879923, 0.0508977, 0.725191, 0.686664, -0.168464, -0.671469, 0.72163, 0, 0, 0)
+transform = Transform3D(0.936741, 0.203745, -0.284611, 0.0508977, 0.725191, 0.686664, 0.346302, -0.657713, 0.668946, 0, 0, 0)
 light_energy = 0.4
 shadow_enabled = true
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("3_74est")]
+[node name="base_stage" parent="Environment" instance=ExtResource("1_s58fo")]
 
-[node name="Director" parent="CharacterBody3D" index="1"]
+[node name="StageElements" type="Node" parent="."]
+
+[node name="BlastZone" type="Node3D" parent="StageElements"]
+
+[node name="Area3D" type="Area3D" parent="StageElements/BlastZone"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("5_qeb1u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StageElements/BlastZone/Area3D"]
+shape = SubResource("BoxShape3D_5tiey")
+
+[node name="SpawnPoint" type="Node3D" parent="StageElements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.905, 0)
+
+[node name="Combatants" type="Node" parent="."]
+
+[node name="CharacterBody3D" parent="Combatants" instance=ExtResource("3_74est")]
+
+[node name="Director" parent="Combatants/CharacterBody3D" index="1"]
 controllable = true
 
-[node name="CollisionShape3D" parent="CharacterBody3D" index="2"]
+[node name="CollisionShape3D" parent="Combatants/CharacterBody3D" index="2"]
 shape = SubResource("BoxShape3D_r827d")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 28)
-remote_path = NodePath("../../FightCamera")
+[node name="Abdomen" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="0"]
+transform = Transform3D(0.824275, 0.172646, -0.539225, -0.291389, 0.945921, -0.142566, 0.485451, 0.274638, 0.830007, -0.0184166, 0.446991, -0.00656174)
 
-[node name="CharacterBody3D2" parent="." instance=ExtResource("3_74est")]
+[node name="ShinL" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="1"]
+transform = Transform3D(0.716185, 0.415326, 0.560868, 0.373837, -0.906922, 0.194234, 0.589341, 0.0705732, -0.804792, -0.0337931, 0.276568, 0.177209)
+
+[node name="ThighL" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="2"]
+transform = Transform3D(0.735993, -0.291699, 0.610914, 0.241359, -0.730049, -0.639346, 0.632501, 0.61801, -0.466903, 0.0238402, 0.420809, 0.0551042)
+
+[node name="ShinR" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="3"]
+transform = Transform3D(0.0849536, 0.475691, 0.875501, -0.463534, -0.758934, 0.457335, 0.881997, -0.444677, 0.156025, -0.186571, 0.232618, -0.0437075)
+
+[node name="ThighR" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="4"]
+transform = Transform3D(0.0910987, -0.658045, 0.747448, -0.297431, -0.734289, -0.610209, 0.950387, -0.166725, -0.262616, -0.0565556, 0.377698, -0.0107664)
+
+[node name="BoneAttachment3D6" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="5"]
+transform = Transform3D(0.714494, -0.475598, -0.513133, 0.383142, 0.87965, -0.281811, 0.585406, 0.00474976, 0.810727, 0.0159102, 0.383501, -0.00690458)
+
+[node name="BoneAttachment3D7" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="6"]
+transform = Transform3D(0.815138, -6.60764e-05, -0.579278, 3.65525e-05, 1, -6.26588e-05, 0.579284, 2.99068e-05, 0.81513, 0.0895038, 0.00733806, 0.198157)
+
+[node name="BoneAttachment3D8" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="7"]
+transform = Transform3D(-0.972866, 0.179085, -0.146494, -0.201183, -0.342073, 0.917884, 0.114268, 0.92245, 0.36882, 0.146271, 0.583445, 0.291613)
+
+[node name="Head" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="8"]
+transform = Transform3D(0.999961, 0.00619148, 0.00634938, -1.07288e-06, 0.716034, -0.698065, -0.0088684, 0.698038, 0.716006, -0.00361119, 0.765028, 0.117279)
+
+[node name="Neck" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="9"]
+transform = Transform3D(0.815133, -0.0418772, -0.577758, -0.170017, 0.936162, -0.307725, 0.553762, 0.349065, 0.755977, 0.000810864, 0.666173, 0.0804196)
+
+[node name="ForearmL" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="10"]
+transform = Transform3D(-0.731875, -0.277153, -0.622531, -0.634181, 0.611303, 0.473416, 0.249347, 0.741279, -0.623162, 0.188224, 0.490914, 0.179414)
+
+[node name="UpperArmL" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="11"]
+transform = Transform3D(-0.819018, 0.563254, -0.109336, -0.55813, -0.737911, 0.379443, 0.133043, 0.371795, 0.918732, 0.0963356, 0.611296, 0.11876)
+
+[node name="ForearmR" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="12"]
+transform = Transform3D(-0.646769, -0.761018, -0.0504158, 0.700887, -0.619128, 0.354172, -0.300745, 0.193732, 0.93382, -0.0895246, 0.574445, -0.129322)
+
+[node name="UpperArmR" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="13"]
+transform = Transform3D(-0.643497, -0.0197099, -0.765195, 0.628047, -0.58506, -0.513091, -0.437572, -0.810751, 0.388863, -0.0863091, 0.66989, 0.00294199)
+
+[node name="Chest" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="14"]
+transform = Transform3D(0.818392, 0.0209715, -0.574277, -0.259604, 0.905041, -0.336907, 0.512679, 0.424806, 0.746123, -0.00221046, 0.535786, 0.0192186)
+
+[node name="BoneAttachment3D16" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="15"]
+transform = Transform3D(0.202112, -5.39606e-05, -0.979363, -3.61502e-05, 1, -6.25564e-05, 0.979373, 4.8037e-05, 0.20211, -0.0453512, 0.0073151, -0.175717)
+
+[node name="BoneAttachment3D17" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="16"]
+transform = Transform3D(-0.0849744, 0.972825, -0.215386, -0.823038, -0.190371, -0.535133, -0.561594, 0.131798, 0.816848, -0.204719, 0.480729, -0.0999978)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Combatants/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 38)
+remote_path = NodePath("../../../FightCamera")
+
+[node name="CharacterBody3D2" parent="Combatants" instance=ExtResource("3_74est")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 
-[node name="CollisionShape3D" parent="CharacterBody3D2" index="2"]
+[node name="CollisionShape3D" parent="Combatants/CharacterBody3D2" index="2"]
 shape = SubResource("BoxShape3D_85bd0")
+
+[node name="Abdomen" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="0"]
+transform = Transform3D(0.824275, 0.172646, -0.539225, -0.291389, 0.945921, -0.142566, 0.485451, 0.274638, 0.830007, -0.0184166, 0.446991, -0.00656174)
+
+[node name="ShinL" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="1"]
+transform = Transform3D(0.716185, 0.415326, 0.560868, 0.373837, -0.906922, 0.194234, 0.589341, 0.0705732, -0.804792, -0.0337931, 0.276568, 0.177209)
+
+[node name="ThighL" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="2"]
+transform = Transform3D(0.735993, -0.291699, 0.610914, 0.241359, -0.730049, -0.639346, 0.632501, 0.61801, -0.466903, 0.0238402, 0.420809, 0.0551042)
+
+[node name="ShinR" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="3"]
+transform = Transform3D(0.0849536, 0.475691, 0.875501, -0.463534, -0.758934, 0.457335, 0.881997, -0.444677, 0.156025, -0.186571, 0.232618, -0.0437075)
+
+[node name="ThighR" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="4"]
+transform = Transform3D(0.0910987, -0.658045, 0.747448, -0.297431, -0.734289, -0.610209, 0.950387, -0.166725, -0.262616, -0.0565556, 0.377698, -0.0107664)
+
+[node name="BoneAttachment3D6" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="5"]
+transform = Transform3D(0.714494, -0.475598, -0.513133, 0.383142, 0.87965, -0.281811, 0.585406, 0.00474976, 0.810727, 0.0159102, 0.383501, -0.00690458)
+
+[node name="BoneAttachment3D7" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="6"]
+transform = Transform3D(0.815138, -6.60764e-05, -0.579278, 3.65525e-05, 1, -6.26588e-05, 0.579284, 2.99068e-05, 0.81513, 0.0895038, 0.00733806, 0.198157)
+
+[node name="BoneAttachment3D8" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="7"]
+transform = Transform3D(-0.972866, 0.179085, -0.146494, -0.201183, -0.342073, 0.917884, 0.114268, 0.92245, 0.36882, 0.146271, 0.583445, 0.291613)
+
+[node name="Head" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="8"]
+transform = Transform3D(0.999961, 0.00619148, 0.00634938, -1.07288e-06, 0.716034, -0.698065, -0.0088684, 0.698038, 0.716006, -0.00361119, 0.765028, 0.117279)
+
+[node name="Neck" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="9"]
+transform = Transform3D(0.815133, -0.0418772, -0.577758, -0.170017, 0.936162, -0.307725, 0.553762, 0.349065, 0.755977, 0.000810864, 0.666173, 0.0804196)
+
+[node name="ForearmL" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="10"]
+transform = Transform3D(-0.731875, -0.277153, -0.622531, -0.634181, 0.611303, 0.473416, 0.249347, 0.741279, -0.623162, 0.188224, 0.490914, 0.179414)
+
+[node name="UpperArmL" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="11"]
+transform = Transform3D(-0.819018, 0.563254, -0.109336, -0.55813, -0.737911, 0.379443, 0.133043, 0.371795, 0.918732, 0.0963356, 0.611296, 0.11876)
+
+[node name="ForearmR" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="12"]
+transform = Transform3D(-0.646769, -0.761018, -0.0504158, 0.700887, -0.619128, 0.354172, -0.300745, 0.193732, 0.93382, -0.0895246, 0.574445, -0.129322)
+
+[node name="UpperArmR" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="13"]
+transform = Transform3D(-0.643497, -0.0197099, -0.765195, 0.628047, -0.58506, -0.513091, -0.437572, -0.810751, 0.388863, -0.0863091, 0.66989, 0.00294199)
+
+[node name="Chest" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="14"]
+transform = Transform3D(0.818392, 0.0209715, -0.574277, -0.259604, 0.905041, -0.336907, 0.512679, 0.424806, 0.746123, -0.00221046, 0.535786, 0.0192186)
+
+[node name="BoneAttachment3D16" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="15"]
+transform = Transform3D(0.202112, -5.39606e-05, -0.979363, -3.61502e-05, 1, -6.25564e-05, 0.979373, 4.8037e-05, 0.20211, -0.0453512, 0.0073151, -0.175717)
+
+[node name="BoneAttachment3D17" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="16"]
+transform = Transform3D(-0.0849744, 0.972825, -0.215386, -0.823038, -0.190371, -0.535133, -0.561594, 0.131798, 0.816848, -0.204719, 0.480729, -0.0999978)
+
+[node name="SecondaryCombatats" type="Node" parent="."]
 
 [node name="Control" parent="." instance=ExtResource("4_71is5")]
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BlastZone" type="Node3D" parent="."]
+[connection signal="body_exited" from="StageElements/BlastZone/Area3D" to="StageElements/BlastZone/Area3D" method="_on_body_exited"]
 
-[node name="Area3D" type="Area3D" parent="BlastZone"]
-script = ExtResource("5_qeb1u")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BlastZone/Area3D"]
-shape = SubResource("BoxShape3D_5tiey")
-
-[node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.905, 0)
-
-[connection signal="body_exited" from="BlastZone/Area3D" to="BlastZone/Area3D" method="_on_body_exited"]
-
-[editable path="CharacterBody3D"]
-[editable path="CharacterBody3D/Mesh/model"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/Abdomen/Abdomen/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ShinL/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ThighL/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ShinR/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ThighR/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/Head/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/Neck/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ForearmL/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/UpperArmL/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ForearmR/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/UpperArmR/Hurtbox"]
-[editable path="CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/Chest/Hurtbox"]
-[editable path="CharacterBody3D/HitBox"]
-[editable path="CharacterBody3D2"]
-[editable path="CharacterBody3D2/Mesh/model"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/Abdomen/Abdomen/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ShinL/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ThighL/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ShinR/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ThighR/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/Head/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/Neck/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ForearmL/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/UpperArmL/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ForearmR/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/UpperArmR/Hurtbox"]
-[editable path="CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/Chest/Hurtbox"]
-[editable path="CharacterBody3D2/HitBox"]
+[editable path="Combatants/CharacterBody3D"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/Abdomen/Abdomen/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ShinL/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ThighL/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ShinR/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ThighR/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/Head/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/Neck/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ForearmL/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/UpperArmL/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/ForearmR/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/UpperArmR/Hurtbox"]
+[editable path="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D/Chest/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/Abdomen/Abdomen/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ShinL/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ThighL/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ShinR/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ThighR/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/Head/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/Neck/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ForearmL/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/UpperArmL/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/ForearmR/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/UpperArmR/Hurtbox"]
+[editable path="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D/Chest/Hurtbox"]
