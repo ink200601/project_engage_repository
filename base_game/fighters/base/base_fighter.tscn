@@ -16251,7 +16251,7 @@ fall_speed = 11.0
 fast_fall_speed = 16.0
 full_hop = 41.0
 midair_hop = 40.0
-midair_jumps = 5.0
+midair_jumps = 2.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_j4oqr")

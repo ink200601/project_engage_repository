@@ -77,6 +77,7 @@ func _physics_process(delta) -> void:
 				state = STANDING
 			if Input.is_action_just_pressed("attack"):
 				state = DOWNTILT
+			
 		DOWNTILT:
 			$"../Mesh/AnimationPlayer".play("CrouchKick")
 		WALKING:
@@ -120,6 +121,12 @@ func _physics_process(delta) -> void:
 	
 	fighter.move_and_slide()
 	print(midair_jumps)
+	
+	if $"../PlatformDetection/RayCast3D".is_colliding():
+		fighter.set_collision_mask_value(2, true)
+	else:
+		fighter.set_collision_mask_value(2, false)
+	
 
 func reset_fall():
 	fall_speed = fall
