@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b51xibdewei3t"]
+[gd_scene load_steps=3 format=3 uid="uid://b51xibdewei3t"]
+
+[ext_resource type="Script" path="res://camera/fight_cam.gd" id="1_y0jkc"]
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_beiiv"]
 frustum_focal_length = 50.0
 
 [node name="FightCamera" type="Camera3D"]
 attributes = SubResource("CameraAttributesPhysical_beiiv")
+script = ExtResource("1_y0jkc")
