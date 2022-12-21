@@ -7,7 +7,7 @@ const MIN_Y := -15
 const MAX_Y := 15
 const MIN_Z := 20
 const MAX_Z := 50
-const Z_FACTOR := 4
+const Z_FACTOR := 3
 
 var combatants: Array
 
