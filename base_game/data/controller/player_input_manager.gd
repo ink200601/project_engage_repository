@@ -5,7 +5,6 @@ extends Node
 @export var controllable = false
 
 var jump_input = false
-var air_jump_input = false
 var down_input = false
 
 
@@ -23,12 +22,9 @@ func _physics_process(_delta) -> void:
 			down_input = false
 
 
-		if Input.is_action_just_pressed("jump"):
+
+		if Input.is_action_pressed("jump"):
 			jump_input = true
 		else:
 			jump_input = false
 		
-		if Input.is_action_just_pressed("jump"):
-			air_jump_input = true
-		else:
-			air_jump_input = false

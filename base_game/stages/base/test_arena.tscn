@@ -73,55 +73,55 @@ controllable = true
 shape = SubResource("BoxShape3D_r827d")
 
 [node name="Abdomen" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="0"]
-transform = Transform3D(0.824275, 0.172646, -0.539225, -0.291389, 0.945921, -0.142566, 0.485451, 0.274638, 0.830007, -0.0184166, 0.446991, -0.00656174)
+transform = Transform3D(0.826869, -0.105401, -0.55243, 0.0168201, 0.986476, -0.163038, 0.562143, 0.125519, 0.81746, 0.0077326, 0.211284, 0.00737817)
 
 [node name="ShinL" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="1"]
-transform = Transform3D(0.716185, 0.415326, 0.560868, 0.373837, -0.906922, 0.194234, 0.589341, 0.0705732, -0.804792, -0.0337931, 0.276568, 0.177209)
+transform = Transform3D(0.772034, 0.599444, 0.21125, 0.586974, -0.799929, 0.124737, 0.243764, 0.0276898, -0.969434, -0.0884462, 0.244807, 0.189934)
 
 [node name="ThighL" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="2"]
-transform = Transform3D(0.735993, -0.291699, 0.610914, 0.241359, -0.730049, -0.639346, 0.632501, 0.61801, -0.466903, 0.0238402, 0.420809, 0.0551042)
+transform = Transform3D(0.757091, -0.647699, 0.085416, 0.438732, 0.407186, -0.801061, 0.484072, 0.643957, 0.592439, 0.0395249, 0.164356, 0.0627021)
 
 [node name="ShinR" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="3"]
-transform = Transform3D(0.0849536, 0.475691, 0.875501, -0.463534, -0.758934, 0.457335, 0.881997, -0.444677, 0.156025, -0.186571, 0.232618, -0.0437075)
+transform = Transform3D(-0.549908, 0.615034, 0.565097, -0.697188, -0.710577, 0.094921, 0.459924, -0.341781, 0.819546, -0.22793, 0.218272, -0.0742454)
 
 [node name="ThighR" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="4"]
-transform = Transform3D(0.0910987, -0.658045, 0.747448, -0.297431, -0.734289, -0.610209, 0.950387, -0.166725, -0.262616, -0.0565556, 0.377698, -0.0107664)
+transform = Transform3D(-0.470422, -0.882353, 0.0125038, -0.557141, 0.285989, -0.779618, 0.684322, -0.373716, -0.62613, -0.053596, 0.161767, -0.000407383)
 
 [node name="BoneAttachment3D6" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="5"]
-transform = Transform3D(0.714494, -0.475598, -0.513133, 0.383142, 0.87965, -0.281811, 0.585406, 0.00474976, 0.810727, 0.0159102, 0.383501, -0.00690458)
+transform = Transform3D(0.827586, -0.1133, -0.549786, 0.0230067, 0.985442, -0.168449, 0.560867, 0.126757, 0.818144, 0.0159102, 0.140159, -0.0017707)
 
 [node name="BoneAttachment3D7" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="6"]
 transform = Transform3D(0.815138, -6.60764e-05, -0.579278, 3.65525e-05, 1, -6.26588e-05, 0.579284, 2.99068e-05, 0.81513, 0.0895038, 0.00733806, 0.198157)
 
 [node name="BoneAttachment3D8" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="7"]
-transform = Transform3D(-0.972866, 0.179085, -0.146494, -0.201183, -0.342073, 0.917884, 0.114268, 0.92245, 0.36882, 0.146271, 0.583445, 0.291613)
+transform = Transform3D(-0.972866, 0.179084, -0.146493, -0.195409, -0.296972, 0.934678, 0.123882, 0.937943, 0.323908, 0.146271, 0.351143, 0.281388)
 
 [node name="Head" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="8"]
-transform = Transform3D(0.999961, 0.00619148, 0.00634938, -1.07288e-06, 0.716034, -0.698065, -0.0088684, 0.698038, 0.716006, -0.00361119, 0.765028, 0.117279)
+transform = Transform3D(0.999959, 0.00347112, 0.00836185, -8.34465e-07, 0.923621, -0.383308, -0.00905362, 0.383292, 0.923583, -0.00361109, 0.527681, 0.130056)
 
 [node name="Neck" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="9"]
-transform = Transform3D(0.815133, -0.0418772, -0.577758, -0.170017, 0.936162, -0.307725, 0.553762, 0.349065, 0.755977, 0.000810864, 0.666173, 0.0804196)
+transform = Transform3D(0.815133, -0.0418768, -0.577758, -0.200987, 0.914979, -0.349883, 0.543288, 0.401323, 0.737413, 0.000810926, 0.431063, 0.0876781)
 
 [node name="ForearmL" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="10"]
-transform = Transform3D(-0.731875, -0.277153, -0.622531, -0.634181, 0.611303, 0.473416, 0.249347, 0.741279, -0.623162, 0.188224, 0.490914, 0.179414)
+transform = Transform3D(0.00646528, -0.688452, -0.725254, -0.999977, -0.00307432, -0.00599592, 0.00189827, 0.725276, -0.688456, 0.250431, 0.352059, 0.171672)
 
 [node name="UpperArmL" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="11"]
-transform = Transform3D(-0.819018, 0.563254, -0.109336, -0.55813, -0.737911, 0.379443, 0.133043, 0.371795, 0.918732, 0.0963356, 0.611296, 0.11876)
+transform = Transform3D(-0.102597, 0.944569, -0.311872, -0.987202, -0.135168, -0.0846236, -0.122088, 0.299198, 0.946348, 0.0963356, 0.37411, 0.122861)
 
 [node name="ForearmR" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="12"]
-transform = Transform3D(-0.646769, -0.761018, -0.0504158, 0.700887, -0.619128, 0.354172, -0.300745, 0.193732, 0.93382, -0.0895246, 0.574445, -0.129322)
+transform = Transform3D(-0.615299, -0.787626, -0.0324579, 0.733009, -0.586809, 0.344025, -0.290009, 0.187886, 0.938399, -0.0855506, 0.350904, -0.126678)
 
 [node name="UpperArmR" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="13"]
-transform = Transform3D(-0.643497, -0.0197099, -0.765195, 0.628047, -0.58506, -0.513091, -0.437572, -0.810751, 0.388863, -0.0863091, 0.66989, 0.00294199)
+transform = Transform3D(-0.615617, 0.00464942, -0.788032, 0.66126, -0.540899, -0.519773, -0.428662, -0.841075, 0.329912, -0.086309, 0.439145, 0.0105336)
 
 [node name="Chest" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="14"]
-transform = Transform3D(0.818392, 0.0209715, -0.574277, -0.259604, 0.905041, -0.336907, 0.512679, 0.424806, 0.746123, -0.00221046, 0.535786, 0.0192186)
+transform = Transform3D(0.818392, 0.0209719, -0.574277, -0.288114, 0.879634, -0.378463, 0.497217, 0.475188, 0.725928, -0.00221046, 0.304336, 0.0192188)
 
 [node name="BoneAttachment3D16" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="15"]
 transform = Transform3D(0.202112, -5.39606e-05, -0.979363, -3.61502e-05, 1, -6.25564e-05, 0.979373, 4.8037e-05, 0.20211, -0.0453512, 0.0073151, -0.175717)
 
 [node name="BoneAttachment3D17" parent="Combatants/CharacterBody3D/Mesh/model/FighterRig/Skeleton3D" index="16"]
-transform = Transform3D(-0.0849744, 0.972825, -0.215386, -0.823038, -0.190371, -0.535133, -0.561594, 0.131798, 0.816848, -0.204719, 0.480729, -0.0999978)
+transform = Transform3D(-0.0849744, 0.972825, -0.215387, -0.881246, -0.174252, -0.439366, -0.464957, 0.152474, 0.872105, -0.204719, 0.261634, -0.0982924)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Combatants/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 38)
@@ -134,55 +134,55 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 shape = SubResource("BoxShape3D_85bd0")
 
 [node name="Abdomen" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="0"]
-transform = Transform3D(0.824275, 0.172646, -0.539225, -0.291389, 0.945921, -0.142566, 0.485451, 0.274638, 0.830007, -0.0184166, 0.446991, -0.00656174)
+transform = Transform3D(0.826869, -0.105401, -0.55243, 0.0168201, 0.986476, -0.163038, 0.562143, 0.125519, 0.81746, 0.0077326, 0.211284, 0.00737817)
 
 [node name="ShinL" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="1"]
-transform = Transform3D(0.716185, 0.415326, 0.560868, 0.373837, -0.906922, 0.194234, 0.589341, 0.0705732, -0.804792, -0.0337931, 0.276568, 0.177209)
+transform = Transform3D(0.772034, 0.599444, 0.21125, 0.586974, -0.799929, 0.124737, 0.243764, 0.0276898, -0.969434, -0.0884462, 0.244807, 0.189934)
 
 [node name="ThighL" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="2"]
-transform = Transform3D(0.735993, -0.291699, 0.610914, 0.241359, -0.730049, -0.639346, 0.632501, 0.61801, -0.466903, 0.0238402, 0.420809, 0.0551042)
+transform = Transform3D(0.757091, -0.647699, 0.085416, 0.438732, 0.407186, -0.801061, 0.484072, 0.643957, 0.592439, 0.0395249, 0.164356, 0.0627021)
 
 [node name="ShinR" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="3"]
-transform = Transform3D(0.0849536, 0.475691, 0.875501, -0.463534, -0.758934, 0.457335, 0.881997, -0.444677, 0.156025, -0.186571, 0.232618, -0.0437075)
+transform = Transform3D(-0.549908, 0.615034, 0.565097, -0.697188, -0.710577, 0.094921, 0.459924, -0.341781, 0.819546, -0.22793, 0.218272, -0.0742454)
 
 [node name="ThighR" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="4"]
-transform = Transform3D(0.0910987, -0.658045, 0.747448, -0.297431, -0.734289, -0.610209, 0.950387, -0.166725, -0.262616, -0.0565556, 0.377698, -0.0107664)
+transform = Transform3D(-0.470422, -0.882353, 0.0125038, -0.557141, 0.285989, -0.779618, 0.684322, -0.373716, -0.62613, -0.053596, 0.161767, -0.000407383)
 
 [node name="BoneAttachment3D6" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="5"]
-transform = Transform3D(0.714494, -0.475598, -0.513133, 0.383142, 0.87965, -0.281811, 0.585406, 0.00474976, 0.810727, 0.0159102, 0.383501, -0.00690458)
+transform = Transform3D(0.827586, -0.1133, -0.549786, 0.0230067, 0.985442, -0.168449, 0.560867, 0.126757, 0.818144, 0.0159102, 0.140159, -0.0017707)
 
 [node name="BoneAttachment3D7" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="6"]
 transform = Transform3D(0.815138, -6.60764e-05, -0.579278, 3.65525e-05, 1, -6.26588e-05, 0.579284, 2.99068e-05, 0.81513, 0.0895038, 0.00733806, 0.198157)
 
 [node name="BoneAttachment3D8" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="7"]
-transform = Transform3D(-0.972866, 0.179085, -0.146494, -0.201183, -0.342073, 0.917884, 0.114268, 0.92245, 0.36882, 0.146271, 0.583445, 0.291613)
+transform = Transform3D(-0.972866, 0.179084, -0.146493, -0.195409, -0.296972, 0.934678, 0.123882, 0.937943, 0.323908, 0.146271, 0.351143, 0.281388)
 
 [node name="Head" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="8"]
-transform = Transform3D(0.999961, 0.00619148, 0.00634938, -1.07288e-06, 0.716034, -0.698065, -0.0088684, 0.698038, 0.716006, -0.00361119, 0.765028, 0.117279)
+transform = Transform3D(0.999959, 0.00347112, 0.00836185, -8.34465e-07, 0.923621, -0.383308, -0.00905362, 0.383292, 0.923583, -0.00361109, 0.527681, 0.130056)
 
 [node name="Neck" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="9"]
-transform = Transform3D(0.815133, -0.0418772, -0.577758, -0.170017, 0.936162, -0.307725, 0.553762, 0.349065, 0.755977, 0.000810864, 0.666173, 0.0804196)
+transform = Transform3D(0.815133, -0.0418768, -0.577758, -0.200987, 0.914979, -0.349883, 0.543288, 0.401323, 0.737413, 0.000810926, 0.431063, 0.0876781)
 
 [node name="ForearmL" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="10"]
-transform = Transform3D(-0.731875, -0.277153, -0.622531, -0.634181, 0.611303, 0.473416, 0.249347, 0.741279, -0.623162, 0.188224, 0.490914, 0.179414)
+transform = Transform3D(0.00646528, -0.688452, -0.725254, -0.999977, -0.00307432, -0.00599592, 0.00189827, 0.725276, -0.688456, 0.250431, 0.352059, 0.171672)
 
 [node name="UpperArmL" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="11"]
-transform = Transform3D(-0.819018, 0.563254, -0.109336, -0.55813, -0.737911, 0.379443, 0.133043, 0.371795, 0.918732, 0.0963356, 0.611296, 0.11876)
+transform = Transform3D(-0.102597, 0.944569, -0.311872, -0.987202, -0.135168, -0.0846236, -0.122088, 0.299198, 0.946348, 0.0963356, 0.37411, 0.122861)
 
 [node name="ForearmR" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="12"]
-transform = Transform3D(-0.646769, -0.761018, -0.0504158, 0.700887, -0.619128, 0.354172, -0.300745, 0.193732, 0.93382, -0.0895246, 0.574445, -0.129322)
+transform = Transform3D(-0.615299, -0.787626, -0.0324579, 0.733009, -0.586809, 0.344025, -0.290009, 0.187886, 0.938399, -0.0855506, 0.350904, -0.126678)
 
 [node name="UpperArmR" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="13"]
-transform = Transform3D(-0.643497, -0.0197099, -0.765195, 0.628047, -0.58506, -0.513091, -0.437572, -0.810751, 0.388863, -0.0863091, 0.66989, 0.00294199)
+transform = Transform3D(-0.615617, 0.00464942, -0.788032, 0.66126, -0.540899, -0.519773, -0.428662, -0.841075, 0.329912, -0.086309, 0.439145, 0.0105336)
 
 [node name="Chest" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="14"]
-transform = Transform3D(0.818392, 0.0209715, -0.574277, -0.259604, 0.905041, -0.336907, 0.512679, 0.424806, 0.746123, -0.00221046, 0.535786, 0.0192186)
+transform = Transform3D(0.818392, 0.0209719, -0.574277, -0.288114, 0.879634, -0.378463, 0.497217, 0.475188, 0.725928, -0.00221046, 0.304336, 0.0192188)
 
 [node name="BoneAttachment3D16" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="15"]
 transform = Transform3D(0.202112, -5.39606e-05, -0.979363, -3.61502e-05, 1, -6.25564e-05, 0.979373, 4.8037e-05, 0.20211, -0.0453512, 0.0073151, -0.175717)
 
 [node name="BoneAttachment3D17" parent="Combatants/CharacterBody3D2/Mesh/model/FighterRig/Skeleton3D" index="16"]
-transform = Transform3D(-0.0849744, 0.972825, -0.215386, -0.823038, -0.190371, -0.535133, -0.561594, 0.131798, 0.816848, -0.204719, 0.480729, -0.0999978)
+transform = Transform3D(-0.0849744, 0.972825, -0.215387, -0.881246, -0.174252, -0.439366, -0.464957, 0.152474, 0.872105, -0.204719, 0.261634, -0.0982924)
 
 [node name="SecondaryCombatats" type="Node" parent="."]
 

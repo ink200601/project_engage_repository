@@ -28,6 +28,8 @@ extends Node
 
 enum {
 	STANDING,
+	CROUCHING,
+	DOWNTILT,
 	WALKING,
 	INITIALDASH,
 	DASHING,
@@ -36,33 +38,54 @@ enum {
 	JUMP,
 	HELPLESS
 }
-
+var can_jump
 var previous_state
 
 var state = STANDING
 func _physics_process(delta) -> void:
 	
 	var current_state = state
-	
 	match state:
 		STANDING:
-			
+			can_jump = true
+			$"../Mesh/AnimationPlayer".play("Idle")
+			midair_jumps = fighter.midair_jumps
 			if director.direction.x != 0:
 				fighter.velocity.x = move_toward(fighter.velocity.x, speed * director.direction.x, acceleration)
 			else:
 				fighter.velocity.x = move_toward(fighter.velocity.x, 0, 1)
 			
+			if director.down_input == true:
+				state = CROUCHING
+			
+			if director.direction.x > 0:
+				$"../Mesh".rotation.y = deg_to_rad(0)
+			if director.direction.x < 0:
+				$"../Mesh".rotation.y = deg_to_rad(180)
+			
 			if director.jump_input == true:
 				previous_state = state
 				state = JUMP
 			if !fighter.is_on_floor():
-				director.air_jump_input = false
+				director.jump_input = false
 				state = AIR
 			
+		CROUCHING:
+			fighter.velocity = Vector3.ZERO
+			$"../Mesh/AnimationPlayer".play("Crouch")
+			if director.down_input == false:
+				state = STANDING
+			if Input.is_action_just_pressed("attack"):
+				state = DOWNTILT
+		DOWNTILT:
+			$"../Mesh/AnimationPlayer".play("CrouchKick")
 		WALKING:
 			pass
 		AIR:
-			director.air_jump_input = false
+			
+			if director.jump_input == false:
+				can_jump = true
+			
 			fighter.velocity.y -= gravity
 			
 			if director.direction.x != 0:
@@ -70,30 +93,38 @@ func _physics_process(delta) -> void:
 			else:
 				fighter.velocity.x = move_toward(fighter.velocity.x, 0, acceleration)
 			
-			if director.air_jump_input == true:
-				fighter.velocity = fighter.velocity.lerp(Vector3(0, initial_jump, 0), midair_hop * delta)
+			if can_jump == true:
+				if director.jump_input == true and midair_jumps > 0:
+					midair_jumps -= 1
+					state = JUMP
 			
 			if fighter.velocity.y < 0:
 				if director.down_input == true:
 					fall_speed = fast_fall
 				fighter.velocity.y = clamp(fighter.velocity.y, -fall_speed, fall_speed)
 			
+			
 			if fighter.is_on_floor():
 				previous_state = state
 				state = STANDING
-
 		JUMP:
 			previous_state = state
 			fighter.velocity = fighter.velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
 			state = AIR
+			if director.jump_input == true:
+				can_jump = false
 		HELPLESS:
 			fighter.velocity.y -= gravity
 			fighter.velocity.y = clamp(fighter.velocity.y, -fall_speed, fall_speed)
 			fighter.move_and_slide()
 	
 	fighter.move_and_slide()
-	print(previous_state)
+	print(midair_jumps)
 
 func reset_fall():
 	fall_speed = fall
 	
+
+
+func down_tilt_fin():
+	state = CROUCHING
