@@ -18,7 +18,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5tiey"]
-size = Vector3(59.3988, 38.0875, 32.4524)
+size = Vector3(64, 42, 32.4524)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r827d"]
 resource_local_to_scene = true
@@ -31,8 +31,9 @@ size = Vector3(1, 2, 1)
 [node name="TestArena" type="Node3D"]
 
 [node name="FightCamera" parent="." instance=ExtResource("2_5bsa3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 38)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.169, 38)
 current = true
+MAX_Z = 40
 
 [node name="Environment" type="Node" parent="."]
 
@@ -64,6 +65,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.905, 0)
 [node name="Combatants" type="Node" parent="."]
 
 [node name="CharacterBody3D" parent="Combatants" instance=ExtResource("3_74est")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+walk_speed = 14.0
 
 [node name="Director" parent="Combatants/CharacterBody3D" index="1"]
 controllable = true
@@ -71,11 +74,8 @@ controllable = true
 [node name="CollisionShape3D" parent="Combatants/CharacterBody3D" index="2"]
 shape = SubResource("BoxShape3D_r827d")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Combatants/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 38)
-
 [node name="CharacterBody3D2" parent="Combatants" instance=ExtResource("3_74est")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0)
 
 [node name="CollisionShape3D" parent="Combatants/CharacterBody3D2" index="2"]
 shape = SubResource("BoxShape3D_85bd0")

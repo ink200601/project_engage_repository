@@ -1,13 +1,13 @@
 extends Camera3D
 
 
-const MIN_X := -20
-const MAX_X := 20
-const MIN_Y := -15
-const MAX_Y := 15
-const MIN_Z := 20
-const MAX_Z := 50
-const Z_FACTOR := 3
+@export var MIN_X := -20
+@export var MAX_X := 20
+@export var MIN_Y := -15
+@export var MAX_Y := 15
+@export var MIN_Z := 20
+@export var MAX_Z := 50
+@export var Z_FACTOR := 3
 
 var combatants: Array
 

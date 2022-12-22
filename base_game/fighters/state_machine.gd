@@ -2,6 +2,8 @@ extends Node
 
 @onready var fighter = get_parent()
 @onready var director = $"../Director"
+@onready var anim = $"../Mesh/AnimationPlayer"
+@onready var mesh = $"../Mesh"
 
 @onready var weight = fighter.weight
 @onready var fall_gravity = fighter.gravity
@@ -35,23 +37,27 @@ enum {
 	DASHING,
 	GROUNDATTACK,
 	AIR,
+	DAIR,
+	JUMPSQUAT,
 	JUMP,
+	SHORTHOP,
 	HELPLESS
 }
 var can_jump
 var previous_state
+var prev_frame_input_str = 0
 
 var state = STANDING
 func _physics_process(delta) -> void:
 	
 	var current_state = state
 	match state:
-		STANDING:
+		STANDING: 
 			can_jump = true
-			$"../Mesh/AnimationPlayer".play("Idle")
+			anim.play("Idle")
 			midair_jumps = fighter.midair_jumps
 			if director.direction.x != 0:
-				fighter.velocity.x = move_toward(fighter.velocity.x, speed * director.direction.x, acceleration)
+				state = WALKING
 			else:
 				fighter.velocity.x = move_toward(fighter.velocity.x, 0, 1)
 			
@@ -59,31 +65,53 @@ func _physics_process(delta) -> void:
 				state = CROUCHING
 			
 			if director.direction.x > 0:
-				$"../Mesh".rotation.y = deg_to_rad(0)
+				mesh.rotation.y = deg_to_rad(0)
 			if director.direction.x < 0:
-				$"../Mesh".rotation.y = deg_to_rad(180)
+				mesh.rotation.y = deg_to_rad(180)
 			
 			if director.jump_input == true:
-				previous_state = state
-				state = JUMP
-			if !fighter.is_on_floor():
-				director.jump_input = false
-				state = AIR
+				state = JUMPSQUAT
 			
+			if !fighter.is_on_floor():
+				state = AIR
 		CROUCHING:
 			fighter.velocity = Vector3.ZERO
-			$"../Mesh/AnimationPlayer".play("Crouch")
+			anim.play("Crouch")
 			if director.down_input == false:
 				state = STANDING
 			if Input.is_action_just_pressed("attack"):
 				state = DOWNTILT
 			
-		DOWNTILT:
-			$"../Mesh/AnimationPlayer".play("CrouchKick")
-		WALKING:
-			pass
-		AIR:
+			if director.jump_input == true:
+				state = JUMPSQUAT
 			
+		DOWNTILT:
+			anim.play("CrouchKick")
+		WALKING:
+			fighter.velocity.x = move_toward(fighter.velocity.x, speed * director.direction.x, acceleration)
+			
+			if director.direction.x == 0:
+				state = STANDING
+			
+			if !fighter.is_on_floor():
+				state = AIR
+			
+			if director.jump_input == true:
+				state = JUMPSQUAT
+			
+		DASHING:
+			if director.direction.x > 0:
+				fighter.velocity.x = run_speed
+			elif director.direction.x < 0:
+				fighter.velocity.x = -run_speed
+			
+			if director.direction.x == 0:
+				state = STANDING
+			
+			if !fighter.is_on_floor():
+				state = AIR
+		AIR:
+			anim.play("Jump_FighterRig")
 			if director.jump_input == false:
 				can_jump = true
 			
@@ -97,7 +125,7 @@ func _physics_process(delta) -> void:
 			if can_jump == true:
 				if director.jump_input == true and midair_jumps > 0:
 					midair_jumps -= 1
-					state = JUMP
+					state = JUMPSQUAT
 			
 			if fighter.velocity.y < 0:
 				if director.down_input == true:
@@ -108,9 +136,32 @@ func _physics_process(delta) -> void:
 			if fighter.is_on_floor():
 				previous_state = state
 				state = STANDING
+			
+			if director.down_input == true:
+				if Input.is_action_just_pressed("attack"):
+					state = DAIR
+				
+			
+			
+		DAIR:
+			anim.play("Stomp")
+			fighter.velocity.y -= gravity
+			if fighter.is_on_floor():
+				state = STANDING
+		
+		JUMPSQUAT:
+			anim.play("JumpSquat")
+		
 		JUMP:
 			previous_state = state
 			fighter.velocity = fighter.velocity.lerp(Vector3(0, initial_jump, 0), full_hop * delta)
+			state = AIR
+			if director.jump_input == true:
+				can_jump = false
+			
+			
+		SHORTHOP:
+			fighter.velocity = fighter.velocity.lerp(Vector3(0, initial_jump, 0), short_hop * delta)
 			state = AIR
 			if director.jump_input == true:
 				can_jump = false
@@ -128,10 +179,12 @@ func _physics_process(delta) -> void:
 		fighter.set_collision_mask_value(2, false)
 	
 
-func reset_fall():
-	fall_speed = fall
+func jump():
 	
-
+	if director.jump_input == true:
+		state = JUMP
+	else:
+		state = SHORTHOP
 
 func down_tilt_fin():
 	state = CROUCHING
