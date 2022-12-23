@@ -99,6 +99,11 @@ func _physics_process(delta) -> void:
 			if director.jump_input == true:
 				state = JUMPSQUAT
 			
+			if director.direction.x > 0:
+				mesh.rotation.y = deg_to_rad(0)
+			if director.direction.x < 0:
+				mesh.rotation.y = deg_to_rad(180)
+			
 		DASHING:
 			if director.direction.x > 0:
 				fighter.velocity.x = run_speed
@@ -171,7 +176,7 @@ func _physics_process(delta) -> void:
 			fighter.move_and_slide()
 	
 	fighter.move_and_slide()
-	print(midair_jumps)
+	print(director.direction)
 	
 	if $"../PlatformDetection/RayCast3D".is_colliding():
 		fighter.set_collision_mask_value(2, true)
