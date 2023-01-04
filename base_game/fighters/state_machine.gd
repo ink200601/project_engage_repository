@@ -2,8 +2,6 @@ extends Node
 
 @onready var fighter = get_parent()
 @onready var director = $"../Director"
-@onready var anim = $"../Mesh/AnimationPlayer"
-@onready var mesh = $"../Mesh"
 
 @onready var weight = fighter.weight
 @onready var fall_gravity = fighter.gravity
@@ -54,7 +52,6 @@ func _physics_process(delta) -> void:
 	match state:
 		STANDING: 
 			can_jump = true
-			anim.play("Idle")
 			midair_jumps = fighter.midair_jumps
 			if director.direction.x != 0:
 				state = WALKING
@@ -64,10 +61,6 @@ func _physics_process(delta) -> void:
 			if director.down_input == true:
 				state = CROUCHING
 			
-			if director.direction.x > 0:
-				mesh.rotation.y = deg_to_rad(0)
-			if director.direction.x < 0:
-				mesh.rotation.y = deg_to_rad(180)
 			
 			if director.jump_input == true:
 				state = JUMPSQUAT
@@ -76,9 +69,10 @@ func _physics_process(delta) -> void:
 				state = AIR
 		CROUCHING:
 			fighter.velocity = Vector3.ZERO
-			anim.play("Crouch")
 			if director.down_input == false:
 				state = STANDING
+			fighter.set_collision_layer_value(2, false)
+			$"../PlatformDetection/RayCast3D".set_collision_mask_value(2, false)
 			if Input.is_action_just_pressed("attack"):
 				state = DOWNTILT
 			
@@ -86,7 +80,7 @@ func _physics_process(delta) -> void:
 				state = JUMPSQUAT
 			
 		DOWNTILT:
-			anim.play("CrouchKick")
+			state = CROUCHING
 		WALKING:
 			fighter.velocity.x = move_toward(fighter.velocity.x, speed * director.direction.x, acceleration)
 			
@@ -99,10 +93,6 @@ func _physics_process(delta) -> void:
 			if director.jump_input == true:
 				state = JUMPSQUAT
 			
-			if director.direction.x > 0:
-				mesh.rotation.y = deg_to_rad(0)
-			if director.direction.x < 0:
-				mesh.rotation.y = deg_to_rad(180)
 			
 		DASHING:
 			if director.direction.x > 0:
@@ -116,7 +106,7 @@ func _physics_process(delta) -> void:
 			if !fighter.is_on_floor():
 				state = AIR
 		AIR:
-			anim.play("Jump_FighterRig")
+			$"../PlatformDetection/RayCast3D".set_collision_mask_value(2, true)
 			if director.jump_input == false:
 				can_jump = true
 			
@@ -149,13 +139,12 @@ func _physics_process(delta) -> void:
 			
 			
 		DAIR:
-			anim.play("Stomp")
 			fighter.velocity.y -= gravity
 			if fighter.is_on_floor():
 				state = STANDING
 		
 		JUMPSQUAT:
-			anim.play("JumpSquat")
+			state = JUMP
 		
 		JUMP:
 			previous_state = state
